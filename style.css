@@ -81,3 +81,7 @@ button {
 .norp {
     background-color: rgb(170, 146, 235);
 }
+
+.selected {
+    background-color: rgb(247, 163, 138);
+}

@@ -61,7 +61,7 @@ buttons.forEach((button) => {
     calcscreen.textContent = dispNum2;
     if (!isNaN(curEVal)) {
       if (isOperatorChosen == false) {
-        dispNum1 += curEVal;
+        dispNum1 = curEVal;
         console.log("Number 1: " + dispNum1);
         calcscreen.textContent = `${dispNum1}`;
       } else {
@@ -74,30 +74,23 @@ buttons.forEach((button) => {
       if (dispNum1 != "" && e.target.classList.value == "operator") {
         isOperatorChosen = true;
         operator = curEVal;
-        console.log("Cur Operator: " + curEVal);
+        console.log("Cur Operator: " + operator);
+        operatorBtns.forEach((opera) => {
+          opera.classList.remove('selected');
+        });
+
+        button.classList.toggle("selected");
       }
 
-      if (!dispNum1 == "" && isOperatorChosen && !dispNum2 == "") {
+      if (!dispNum1 == "" && e.target.classList.value == "operator" && !dispNum2 == "") {
         operatorBtns.forEach((opera) => {
           opera.disabled = true;
         });
       }
 
+      if (isOperatorChosen && curEVal == "=") {
 
-      if (isOperatorChosen) {
-
-        // if (!dispNum1 == "" && isOperatorChosen && !dispNum2 == "") {
-        //   operatorBtns.forEach((opera) => {
-        //     opera.disabled = true;
-        //   });
-        // } else {
-
-        // }
-
-
-
-
-        if (curEVal == "=") {
+        // if (curEVal == "=") {
           if (dispNum1 != "" && dispNum2 != "") {
             result = operate(parseInt(dispNum1), operator, parseInt(dispNum2));
             // console.log(typeof result);
@@ -107,13 +100,15 @@ buttons.forEach((button) => {
             isOperatorChosen = false;
             operatorBtns.forEach((opera) => {
               opera.disabled = false;
+              opera.classList.remove('selected');
             });
-          } 
-          else {
-            // calcscreen.textContent = `${dispNum1}`;
+          } else {
+            calcscreen.textContent = `${dispNum1}`;
             return;
           }
-        } else if (curEVal == "all-clear") {
+        // }
+      } else {
+        if (curEVal == "all-clear") {
           dispNum1 = "";
           operator = "";
           dispNum2 = "";
@@ -121,18 +116,13 @@ buttons.forEach((button) => {
           console.log("Cur Operator: " + operator);
           isOperatorChosen = false;
           calcscreen.textContent = "0";
-
+  
           operatorBtns.forEach((opera) => {
-            opera.disabled = false;
+            opera.enabled = true;
           });
         } else if (curEVal == "±") {
-
-        } 
-        // else {
-        //   operator = curEVal;
-        //  c
-        // }
-      }
+        }
+      } 
     }
   });
 });
