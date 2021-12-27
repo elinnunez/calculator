@@ -62,6 +62,7 @@ buttons.forEach((button) => {
       }
     } else {
       // console.log(typeof e.target.value);
+      isOperatorChosen = true;
       if (e.target.value == "=") {
         if (dispNum1 != "" && dispNum2 != "") {
           result = operate(parseInt(dispNum1), operator, parseInt(dispNum2));
