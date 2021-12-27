@@ -49,14 +49,35 @@ body {
 
 
 button {
-    background-color: rgb(192, 192, 186);
+    background-color: rgb(240, 173, 97);
     border-radius: 20px;
     border: 1px solid black;
     font-size: 20px;
     font-weight: bold;
 }
 
+.operator {
+    background-color: rgb(170, 146, 235);
+}
+
 .equal-sign {
-    grid-column-start: 3;
-    grid-column-end: 5;
+    background-color: rgb(170, 146, 235);
+    /* grid-column-start: 3; */
+    /* grid-column-end: 5; */
+}
+
+.all-clear {
+    background-color: rgb(170, 146, 235);
+}
+
+.back-space {
+    background-color: rgb(170, 146, 235);
+}
+
+.modulo {
+    background-color: rgb(170, 146, 235);
+}
+
+.norp {
+    background-color: rgb(170, 146, 235);
 }

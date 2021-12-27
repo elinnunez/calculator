@@ -33,32 +33,36 @@ const operate = (num1, operator, num2) => {
   }
 };
 
+// const dispNum1;
+// const operator;
+// const dispNum2;
+
 const calctainer = document.querySelector(".calculator");
 const calcscreen = document.querySelector(".screen");
 const numgrid = document.querySelector(".numbergrid");
 
-// const createGrid = () => {
-//   for (let i = 0; i < 18; i++) {
-//     let numbtn = document.createElement("button");
-//     numbtn.textContent = `${i + 1}`;
-//     numbtn.classList.add("numbtn-grid");
-//     numgrid.appendChild(numbtn);
-//   }
+const buttons = document.querySelectorAll("button");
 
-//   let equalbtn = document.createElement("button");
-//   equalbtn.textContent = "=";
-//   equalbtn.classList.add("equalSign");
-//   equalbtn.style.gridColumnStart = "3";
-//   equalbtn.style.gridColumnEnd = "5";
-//   numgrid.appendChild(equalbtn);
-//   numgrid.style.gridTemplateColumns = `repeat(4, auto)`;
-// };
+buttons.forEach((button) => {
+  button.addEventListener("click", (e) => {
+    console.log(typeof e.target.value);
+    if(!isNaN(e.target.value)) {
+      calcscreen.textContent = `${e.target.value}`;
+    } else {
+      alert(e.target.value);
+    }
+  })
+})
 
-// createGrid();
+const displayVal = 99999999999;
+const maxDisplaySize = 11;
+// alert(maxDisplaySize);
+
+calcscreen.textContent = `${displayVal}`;
 
 // console.log(add(1,3));
 // console.log(subtract(1,3));
 // console.log(multiply(2,3));
 // console.log(divide(1,3));
 
-console.log(operate(1, "+", 3));
+// console.log(operate(1, "+", 3));
