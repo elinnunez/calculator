@@ -31,7 +31,7 @@ const operate = (num1, operator, num2) => {
     case "%":
       return mod(num1, num2);
     default:
-      return "NaN";
+      return "ERROR";
   }
 };
 
@@ -62,18 +62,29 @@ invertNumBtn.addEventListener("click", (e) => {
   if(curScreen.textContent.value != "") {
     let oldNum = parseFloat(curScreen.textContent) * -1;
 
+    if(isNaN(oldNum)) {
+      oldNum = "";
+    }
+
     if(dispNum2 != "") {
       dispNum2 = oldNum.toString();
       curScreen.textContent = `${dispNum2}`;
+      prevScreen.textContent = dispNum1 + " " + operator + " " + dispNum2;
+      oldScreen = dispNum1 + " " + operator + " " + dispNum2;
     } else {
       dispNum1 = oldNum.toString();
       curScreen.textContent = `${dispNum1}`;
-      // oldScreen = "-"+ oldScreen;
+      prevScreen.textContent = dispNum1 + " " + operator;
+      oldScreen = dispNum1 + " " + operator
     }
+  }
+
+  if(result != undefined) {
+    result *= -1;
   }
 })
 
-allClearBtn.addEventListener("click", (e) => {
+const reset = () => {
   dispNum1 = "";
   operator = "";
   dispNum2 = "";
@@ -86,6 +97,11 @@ allClearBtn.addEventListener("click", (e) => {
 
   prevScreen.textContent = "";
   curScreen.textContent = "";
+
+}
+
+allClearBtn.addEventListener("click", (e) => {
+  reset();
 
 });
 
@@ -121,7 +137,11 @@ numBtns.forEach((button) => {
 operatorBtns.forEach((opera) => {
   opera.addEventListener("click", (e) => {
     oldScreen = dispNum1 + " " + e.target.value + " ";
-    prevScreen.textContent = oldScreen;
+    if(dispNum1 == "" || dispNum1 == ".") {
+      prevScreen.textContent = "";
+    } else {
+      prevScreen.textContent = oldScreen;
+    }
     isOperatorChosen = true;
     operator = e.target.value;
     // console.log(operator);
@@ -129,6 +149,10 @@ operatorBtns.forEach((opera) => {
 });
 
 eqBtn.addEventListener("click", (e) => {
+  if(dispNum1 == "." || dispNum2 == ".") {
+    reset();
+    return;
+  }
   if (isOperatorChosen == true && dispNum1 != "" && dispNum2 != "") {
     result = operate(parseFloat(dispNum1), operator, parseFloat(dispNum2));
     prevScreen.textContent = result.toString();
