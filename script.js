@@ -22,19 +22,14 @@ const operate = (num1, operator, num2) => {
   switch (operator) {
     case "+":
       return add(num1, num2);
-    // break;
     case "-":
       return subtract(num1, num2);
-    // break;
     case "*":
       return multiply(num1, num2);
-    // break;
     case "/":
       return divide(num1, num2);
-    // break;
     case "%":
       return mod(num1, num2);
-      s;
     default:
       return "NaN";
   }
@@ -44,13 +39,12 @@ let dispNum1 = "";
 let operator = "";
 let dispNum2 = "";
 let result = undefined;
-let getResult = false;
 
 let oldScreen = "";
 
 let isOperatorChosen = false;
 
-const calctainer = document.querySelector(".calculator");
+// const calctainer = document.querySelector(".calculator");
 const calcscreen = document.querySelector(".screen");
 const prevScreen = document.querySelector(".prev-screen");
 const curScreen = document.querySelector(".cur-screen");
@@ -60,59 +54,96 @@ const buttons = document.querySelectorAll("button");
 const operatorBtns = document.querySelectorAll(".operator");
 const numBtns = document.querySelectorAll(".num");
 const eqBtn = document.querySelector(".equal-sign");
+const allClearBtn = document.querySelector(".all-clear");
+const invertNumBtn = document.querySelector(".norp");
+
+invertNumBtn.addEventListener("click", (e) => {
+  console.log(curScreen.textContent);
+  if(curScreen.textContent.value != "") {
+    let oldNum = parseFloat(curScreen.textContent) * -1;
+
+    if(dispNum2 != "") {
+      dispNum2 = oldNum.toString();
+      curScreen.textContent = `${dispNum2}`;
+    } else {
+      dispNum1 = oldNum.toString();
+      curScreen.textContent = `${dispNum1}`;
+      // oldScreen = "-"+ oldScreen;
+    }
+  }
+})
+
+allClearBtn.addEventListener("click", (e) => {
+  dispNum1 = "";
+  operator = "";
+  dispNum2 = "";
+  result = undefined;
+  oldScreen = "";
+  isOperatorChosen = false;
+  operatorBtns.forEach((btn) => {
+    btn.disabled = false;
+  });
+
+  prevScreen.textContent = "";
+  curScreen.textContent = "";
+
+});
 
 numBtns.forEach((button) => {
   button.addEventListener("click", (e) => {
-    // if(result != undefined) {
-    //   dispNum1 = e.target.value;
-    //   oldScreen = e.target.value;
-    //   prevScreen.textContent = oldScreen;
-    //   curScreen.textContent = `${dispNum1}`;
-    //   return;
-    // }
     if (isOperatorChosen == false) {
-      if(dispNum1.includes('.') && e.target.value == '.') {
+      if (dispNum1.includes(".") && e.target.value == ".") {
         return;
       }
-      oldScreen+= e.target.value;
+      oldScreen += e.target.value;
+      dispNum1 = oldScreen;
       prevScreen.textContent = oldScreen;
-      dispNum1 += e.target.value;
+      // dispNum1 += e.target.value;
       curScreen.textContent = `${dispNum1}`;
     } else {
-      if(dispNum2.includes('.') && e.target.value == '.') {
+      if (dispNum2.includes(".") && e.target.value == ".") {
         return;
       }
-      oldScreen+= e.target.value;
+      oldScreen += e.target.value;
       prevScreen.textContent = oldScreen;
       dispNum2 += e.target.value;
       curScreen.textContent = `${dispNum2}`;
+    }
+
+    if (dispNum1 != "" && operator != undefined && dispNum2 != "") {
+      operatorBtns.forEach((button) => {
+        button.disabled = true;
+      });
     }
   });
 });
 
 operatorBtns.forEach((opera) => {
   opera.addEventListener("click", (e) => {
-    oldScreen+= " " + e.target.value + " ";
+    oldScreen = dispNum1 + " " + e.target.value + " ";
     prevScreen.textContent = oldScreen;
     isOperatorChosen = true;
     operator = e.target.value;
-    console.log(operator);
+    // console.log(operator);
   });
 });
 
 eqBtn.addEventListener("click", (e) => {
-  if(isOperatorChosen == true && dispNum1 != "" && dispNum2 != "") {
-    result = operate(parseInt(dispNum1), operator, parseInt(dispNum2));
+  if (isOperatorChosen == true && dispNum1 != "" && dispNum2 != "") {
+    result = operate(parseFloat(dispNum1), operator, parseFloat(dispNum2));
     prevScreen.textContent = result.toString();
     curScreen.textContent = `${result}`;
     isOperatorChosen = false;
     dispNum1 = result.toString();
     dispNum2 = "";
     operator = "";
-    oldScreen = result.toString();
-    // dispNum1 = "";
+    oldScreen = "";
+
+    operatorBtns.forEach((button) => {
+      button.disabled = false;
+    });
   }
-})
+});
 
 // buttons.forEach((button) => {
 //   button.addEventListener("click", (e) => {
