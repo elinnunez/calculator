@@ -102,7 +102,6 @@ const reset = () => {
 
 allClearBtn.addEventListener("click", (e) => {
   reset();
-
 });
 
 numBtns.forEach((button) => {
@@ -151,6 +150,7 @@ operatorBtns.forEach((opera) => {
 eqBtn.addEventListener("click", (e) => {
   if(dispNum1 == "." || dispNum2 == ".") {
     reset();
+    curScreen.textContent = "ERROR";
     return;
   }
   if (isOperatorChosen == true && dispNum1 != "" && dispNum2 != "") {
