@@ -129,20 +129,36 @@ curClearBtn.addEventListener("click", (e) => {
 
 numBtns.forEach((button) => {
   button.addEventListener("click", (e) => {
+
     if (isOperatorChosen == false) {
       if (dispNum1.includes(".") && e.target.value == ".") {
         return;
       }
-      oldScreen += e.target.value;
+
+      if(dispNum1.length >= 10) {
+        dispNum1 = Number.parseFloat(dispNum1).toExponential(2).toString();
+        oldScreen = dispNum1;
+      } else {
+        oldScreen += e.target.value;
+      }
+      
       dispNum1 = oldScreen;
       prevScreen.textContent = oldScreen;
-      // dispNum1 += e.target.value;
+      
       curScreen.textContent = `${dispNum1}`;
     } else {
       if (dispNum2.includes(".") && e.target.value == ".") {
         return;
       }
-      oldScreen += e.target.value;
+
+      if(dispNum2.length >= 10) {
+        let new2 = Number.parseFloat(dispNum2).toExponential(2).toString();
+        dispNum2 = new2;
+        oldScreen = dispNum1 + " " + operator + " " + dispNum2;
+      } else {
+        oldScreen += e.target.value;
+      }
+      
       prevScreen.textContent = oldScreen;
       dispNum2 += e.target.value;
       curScreen.textContent = `${dispNum2}`;
@@ -186,6 +202,11 @@ eqBtn.addEventListener("click", (e) => {
   }
   if (isOperatorChosen == true && dispNum1 != "" && dispNum2 != "") {
     result = operate(parseFloat(dispNum1), operator, parseFloat(dispNum2));
+
+    if(result.toString().length >= 10) {
+      result = result.toExponential(2);
+    }
+
     prevScreen.textContent = result.toString();
     curScreen.textContent = `${result}`;
     isOperatorChosen = false;
