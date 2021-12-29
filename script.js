@@ -44,13 +44,9 @@ let oldScreen = "";
 
 let isOperatorChosen = false;
 
-// const calctainer = document.querySelector(".calculator");
-const calcscreen = document.querySelector(".screen");
 const prevScreen = document.querySelector(".prev-screen");
 const curScreen = document.querySelector(".cur-screen");
-const numgrid = document.querySelector(".numbergrid");
 
-const buttons = document.querySelectorAll("button");
 const operatorBtns = document.querySelectorAll(".operator");
 const numBtns = document.querySelectorAll(".num");
 const eqBtn = document.querySelector(".equal-sign");
@@ -230,5 +226,3 @@ const toggleColor = (btn) => {
 
   btn.classList.toggle("selected");
 };
-
-const maxDisplaySize = 11;
