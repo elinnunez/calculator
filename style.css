@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
+
 body {
     display: flex;
     flex-direction: column;
@@ -33,18 +35,21 @@ body {
     /* justify-content: flex-end; */
     justify-content: space-between;
     align-items: flex-end;
-    font-size: 60px;
+    font-size: 40px;
     padding: 5px;
+    font-family: 'Orbitron', sans-serif;
+    color: rgb(7, 71, 87);;
 }
 
 .prev-screen {
     /* border: 1px solid black; */
-    font-size: 25px;
-    font-weight: bold;
+    font-size: 20px;
+    /* font-weight: bold; */
     /* height: 30%; */
     text-align: right;
     width: 100%;
-    color: rgb(70, 105, 29);
+    font-family: 'Orbitron', sans-serif;
+    color: rgb(57, 99, 214);
 }
 
 .numbergrid {
