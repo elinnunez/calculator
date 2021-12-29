@@ -134,10 +134,18 @@ numBtns.forEach((button) => {
 });
 
 operatorBtns.forEach((opera) => {
+
   opera.addEventListener("click", (e) => {
     oldScreen = dispNum1 + " " + e.target.value + " ";
+    console.log(oldScreen);
     if(dispNum1 == "" || dispNum1 == ".") {
       prevScreen.textContent = "";
+      if(dispNum1 == ".") {
+        oldScreen = ".";
+      } else {
+        oldScreen = "";
+      }
+      return;
     } else {
       prevScreen.textContent = oldScreen;
     }
@@ -250,7 +258,7 @@ eqBtn.addEventListener("click", (e) => {
 //   opera.enabled = true;
 // });
 
-const displayVal = 0;
+// const displayVal = 0;
 const maxDisplaySize = 11;
 // alert(maxDisplaySize);
 
