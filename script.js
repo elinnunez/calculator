@@ -59,14 +59,14 @@ const invertNumBtn = document.querySelector(".norp");
 
 invertNumBtn.addEventListener("click", (e) => {
   console.log(curScreen.textContent);
-  if(curScreen.textContent.value != "") {
+  if (curScreen.textContent.value != "") {
     let oldNum = parseFloat(curScreen.textContent) * -1;
 
-    if(isNaN(oldNum)) {
+    if (isNaN(oldNum)) {
       oldNum = "";
     }
 
-    if(dispNum2 != "") {
+    if (dispNum2 != "") {
       dispNum2 = oldNum.toString();
       curScreen.textContent = `${dispNum2}`;
       prevScreen.textContent = dispNum1 + " " + operator + " " + dispNum2;
@@ -75,14 +75,14 @@ invertNumBtn.addEventListener("click", (e) => {
       dispNum1 = oldNum.toString();
       curScreen.textContent = `${dispNum1}`;
       prevScreen.textContent = dispNum1 + " " + operator;
-      oldScreen = dispNum1 + " " + operator
+      oldScreen = dispNum1 + " " + operator;
     }
   }
 
-  if(result != undefined) {
+  if (result != undefined) {
     result *= -1;
   }
-})
+});
 
 const reset = () => {
   dispNum1 = "";
@@ -93,12 +93,12 @@ const reset = () => {
   isOperatorChosen = false;
   operatorBtns.forEach((btn) => {
     btn.disabled = false;
+    btn.classList.remove('selected');
   });
 
   prevScreen.textContent = "";
   curScreen.textContent = "";
-
-}
+};
 
 allClearBtn.addEventListener("click", (e) => {
   reset();
@@ -134,13 +134,12 @@ numBtns.forEach((button) => {
 });
 
 operatorBtns.forEach((opera) => {
-
   opera.addEventListener("click", (e) => {
     oldScreen = dispNum1 + " " + e.target.value + " ";
     console.log(oldScreen);
-    if(dispNum1 == "" || dispNum1 == ".") {
+    if (dispNum1 == "" || dispNum1 == ".") {
       prevScreen.textContent = "";
-      if(dispNum1 == ".") {
+      if (dispNum1 == ".") {
         oldScreen = ".";
       } else {
         oldScreen = "";
@@ -151,12 +150,13 @@ operatorBtns.forEach((opera) => {
     }
     isOperatorChosen = true;
     operator = e.target.value;
+    toggleColor(opera);
     // console.log(operator);
   });
 });
 
 eqBtn.addEventListener("click", (e) => {
-  if(dispNum1 == "." || dispNum2 == ".") {
+  if (dispNum1 == "." || dispNum2 == ".") {
     reset();
     curScreen.textContent = "ERROR";
     return;
@@ -173,6 +173,7 @@ eqBtn.addEventListener("click", (e) => {
 
     operatorBtns.forEach((button) => {
       button.disabled = false;
+      button.classList.remove('selected');
     });
   }
 });
@@ -250,13 +251,25 @@ eqBtn.addEventListener("click", (e) => {
 //   });
 // });
 
-// const disableOperators = operatorBtns.forEach((opera) => {
-//   opera.disabled = true;
-// });
+// const disableOperators = () => {
+//   operatorBtns.forEach((opera) => {
+//     opera.disabled = true;
+//   });
+// };
 
-// const enableOperators = operatorBtns.forEach((opera) => {
-//   opera.enabled = true;
-// });
+// const enableOperators = () => {
+//   operatorBtns.forEach((opera) => {
+//     opera.enabled = true;
+//   });
+// };
+
+const toggleColor = (btn) => {
+  operatorBtns.forEach((opera) => {
+    opera.classList.remove("selected");
+  });
+
+  btn.classList.toggle("selected");
+};
 
 // const displayVal = 0;
 const maxDisplaySize = 11;
