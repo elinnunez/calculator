@@ -55,6 +55,7 @@ const operatorBtns = document.querySelectorAll(".operator");
 const numBtns = document.querySelectorAll(".num");
 const eqBtn = document.querySelector(".equal-sign");
 const allClearBtn = document.querySelector(".all-clear");
+const curClearBtn = document.querySelector(".cur-clear");
 const invertNumBtn = document.querySelector(".norp");
 
 invertNumBtn.addEventListener("click", (e) => {
@@ -103,6 +104,28 @@ const reset = () => {
 allClearBtn.addEventListener("click", (e) => {
   reset();
 });
+
+curClearBtn.addEventListener("click", (e) => {
+  if(dispNum2 == "") {
+    dispNum1 = "";
+    oldScreen = "";
+    operator = "";
+    isOperatorChosen = false;
+    prevScreen.textContent = "";
+    operatorBtns.forEach((button) => {
+      button.disabled = false;
+      button.classList.remove("selected");
+    });
+  } else {
+    oldScreen = dispNum1 + " " + operator + " ";
+    dispNum2 = "";
+    prevScreen.textContent = oldScreen;
+    operatorBtns.forEach((button) => {
+      button.disabled = false;
+    });
+  }
+  curScreen.textContent = "";
+}) ;
 
 numBtns.forEach((button) => {
   button.addEventListener("click", (e) => {
