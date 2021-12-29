@@ -59,8 +59,8 @@ const curClearBtn = document.querySelector(".cur-clear");
 const invertNumBtn = document.querySelector(".norp");
 
 invertNumBtn.addEventListener("click", (e) => {
-  console.log(curScreen.textContent);
-  if (curScreen.textContent.value != "") {
+
+  if (curScreen.textContent != "") {
     let oldNum = parseFloat(curScreen.textContent) * -1;
 
     if (isNaN(oldNum)) {
@@ -76,7 +76,11 @@ invertNumBtn.addEventListener("click", (e) => {
       dispNum1 = oldNum.toString();
       curScreen.textContent = `${dispNum1}`;
       prevScreen.textContent = dispNum1 + " " + operator;
-      oldScreen = dispNum1 + " " + operator;
+      if(isOperatorChosen) {
+        oldScreen = dispNum1 + " " + operator;
+      } else {
+        oldScreen = dispNum1;
+      }
     }
   }
 
@@ -129,7 +133,6 @@ curClearBtn.addEventListener("click", (e) => {
 
 numBtns.forEach((button) => {
   button.addEventListener("click", (e) => {
-
     if (isOperatorChosen == false) {
       if (dispNum1.includes(".") && e.target.value == ".") {
         return;
@@ -175,7 +178,6 @@ numBtns.forEach((button) => {
 operatorBtns.forEach((opera) => {
   opera.addEventListener("click", (e) => {
     oldScreen = dispNum1 + " " + e.target.value + " ";
-    console.log(oldScreen);
     if (dispNum1 == "" || dispNum1 == ".") {
       prevScreen.textContent = "";
       if (dispNum1 == ".") {
@@ -190,7 +192,6 @@ operatorBtns.forEach((opera) => {
     isOperatorChosen = true;
     operator = e.target.value;
     toggleColor(opera);
-    // console.log(operator);
   });
 });
 
